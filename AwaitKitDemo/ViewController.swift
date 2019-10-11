@@ -18,12 +18,11 @@ class ViewController: UIViewController {
     
     print("Step 1: Going to fetch user details")
     let profileImageLocation = try! await(Helpers.fetchUserDetails())
-    print("Step 2: Fetched user details")
     
-    print("Step 3: Going to fetch profile picture")
+    print("Step 2: Going to fetch profile picture")
     let profileImage = try! await(Helpers.fetchUserImage(profileImageLocation: profileImageLocation))
-    print("Step 4: Fetched profile picture")
     
+    print("Step 3: Going to display profile picture")    
     profileImageView.image = profileImage
   }
 }
