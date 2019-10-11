@@ -1,0 +1,3 @@
+${PODS_ROOT}/Target Support Files/Pods-AwaitKitDemo/Pods-AwaitKitDemo-frameworks.sh
+${BUILT_PRODUCTS_DIR}/AwaitKit/AwaitKit.framework
+${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework
