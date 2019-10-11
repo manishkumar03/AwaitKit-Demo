@@ -16,9 +16,9 @@ class Helpers: NSObject {
   static func fetchUserDetails() -> Promise<String> {
     
     return Promise { seal in
-      let bookUrl = URL(string: "https://api.randomuser.me")!
+      let userUrl = URL(string: "https://api.randomuser.me")!
       
-      let task = URLSession.shared.dataTask(with: bookUrl) { (data, response, error) in
+      let task = URLSession.shared.dataTask(with: userUrl) { (data, response, error) in
         let randomUsers = try? JSONDecoder().decode(RandomUsers.self, from: data!)
         let profilePictureUrl = randomUsers?.results[0].picture.large
         print(profilePictureUrl!)
@@ -42,6 +42,6 @@ class Helpers: NSObject {
       
       task.resume()
     }
-  }
-
+  }  
+  
 }

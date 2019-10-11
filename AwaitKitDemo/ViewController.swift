@@ -16,14 +16,24 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    print("Step 1: Going to fetch user details")
+    /* Using AwaitKit */
     let profileImageLocation = try! await(Helpers.fetchUserDetails())
-    
-    print("Step 2: Going to fetch profile picture")
     let profileImage = try! await(Helpers.fetchUserImage(profileImageLocation: profileImageLocation))
-    
-    print("Step 3: Going to display profile picture")    
     profileImageView.image = profileImage
+    
+    /* The following method uses extensions provided by PromiseKit. The delay is only for demonstration purposes */
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+      let userUrl = URL(string: "https://api.randomuser.me?seed=foo")!
+      
+      URLSession.shared.dataTask(.promise, with: userUrl).validate()
+        .compactMap { try JSONDecoder().decode(RandomUsers.self, from: $0.data) }
+        .map { $0.results[0].picture.large}
+        .then { URLSession.shared.dataTask(.promise, with: URL(string: $0)!).validate() }
+        .compactMap { UIImage(data: $0.data) }
+        .done { self.profileImageView.image = $0}
+        .catch { print ($0.localizedDescription)}
+    }
   }
+  
 }
 
