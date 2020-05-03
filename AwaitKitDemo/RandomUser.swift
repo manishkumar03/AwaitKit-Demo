@@ -8,15 +8,15 @@
 
 import Foundation
 
-  struct RandomUsers: Decodable {
+struct RandomUsers: Decodable {
     let results: [RandomUser]
-  }
+}
 
-  struct RandomUser: Decodable {
+struct RandomUser: Decodable {
     let picture: UserPicture
-  }
+}
 
-  struct UserPicture: Decodable {
+struct UserPicture: Decodable {
     let medium: String
     let large: String
-  }
+}
